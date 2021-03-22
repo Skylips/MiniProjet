@@ -4,10 +4,12 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\User;
 use App\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -26,6 +28,8 @@ class BlogController extends AbstractController
 
     public function add(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $event = new Evenement();
         $form = $this->createForm(EvenementType::class, $event);
 
@@ -57,7 +61,7 @@ class BlogController extends AbstractController
             $em->persist($event); // On confie notre entité à l'entity manager (on persist l'entité)
             $em->flush(); // On execute la requete
 
-            return new Response('L\'evenement a bien été enregistrer.');
+            //return new Response('L\'evenement a bien été enregistrer.');
         }
 
         return $this->render('site/add.html.twig', [
@@ -72,6 +76,9 @@ class BlogController extends AbstractController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     */
     public function edit(Evenement $event, Request $request)
     {
         $oldPicture = $event->getPicture();
@@ -108,7 +115,7 @@ class BlogController extends AbstractController
             $em->persist($event);
             $em->flush();
 
-            return new Response('L\'evenement a bien été modifie.');
+            //return new Response('L\'evenement a bien été modifie.');
         }
 
         return $this->render('site/edit.html.twig', [
@@ -120,5 +127,20 @@ class BlogController extends AbstractController
     public function remove($id)
     {
         return new Response('<h1>Delete evenement: ' .$id. '</h1>');
+    }
+
+    public function admin()
+    {
+        $events = $this->getDoctrine()->getRepository(Evenement::class)->findBy(
+            [],
+            ['lastUpdateDate' => 'DESC']
+        );
+
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+        return $this->render('admin/index.html.twig', [
+            'evenements' => $events,
+            'users' => $users
+        ]);
     }
 }

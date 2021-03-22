@@ -1,4 +1,5 @@
 {# templates/base.html.twig #}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +16,19 @@
 <nav>
     <div class="nav-wrapper">
         <div class="container">
-            <a href="#" class="brand-logo">Social Blog</a>
+            <a href="{{ path('homepage') }}" class="brand-logo">Social Blog</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('article_add') }}">Créer un événement</a></li>
+                        <li><a href="/admin">Administration</a></li>
+                    {% endif %}
+                    <li><a href="/logout">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="/login">Connexion</a></li>
+                    <li><a href="{{ path('article_createAccount') }}">Create Account</a></li>
+                {% endif %}
+            </ul>>
         </div>
     </div>
 </nav>

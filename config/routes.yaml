@@ -23,3 +23,11 @@ article_remove:
   controller: App\Controller\BlogController::remove
   requirements:
     id: '\d+'
+
+article_createAccount:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+
+admin:
+  path: /admin
+  controller: App\Controller\BlogController::admin
