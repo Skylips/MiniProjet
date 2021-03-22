@@ -18,7 +18,10 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('picture', FileType::class, ['required' => false])
+            ->add('picture', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
             ->add('title', TextType::class, ['required' => false])
             ->add('content', TextareaType::class, ['required' => false])
             ->add('isPublished', CheckboxType::class, ['required' => false])

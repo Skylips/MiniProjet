@@ -19,10 +19,10 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
-    // /**
-    //  * @return Evenement[] Returns an array of Evenement objects
-    //  */
-    /*
+    /**
+      * @return Evenement[] Returns an array of Evenement objects
+      */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('e')
@@ -34,9 +34,9 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
+
+
     public function findOneBySomeField($value): ?Evenement
     {
         return $this->createQueryBuilder('e')
@@ -46,5 +46,5 @@ class EvenementRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }
