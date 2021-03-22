@@ -43,7 +43,7 @@ class BlogController extends AbstractController
 
                 try {
                     $file->move(
-                        $this->getParameter('images_directory'), // Le dossier dans le quel le fichier va etre charger
+                        $this->getParameter('images_directory'),
                         $fileName
                     );
                 } catch (FileException $e) {
@@ -57,9 +57,9 @@ class BlogController extends AbstractController
                 $event->setPublicationDate(new \DateTime());
             }
 
-            $em = $this->getDoctrine()->getManager(); // On récupère l'entity manager
-            $em->persist($event); // On confie notre entité à l'entity manager (on persist l'entité)
-            $em->flush(); // On execute la requete
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($event);
+            $em->flush();
 
             //return new Response('L\'evenement a bien été enregistrer.');
         }

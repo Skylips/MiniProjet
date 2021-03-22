@@ -1,13 +1,13 @@
 {# templates/blog/add.html.twig #}
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} | Ajouter un article{% endblock %}
+{% block title %}{{ parent() }} | {% trans %}Add an event{% endtrans %}{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
-                <h4>Création d'un événement</h4>
+                <h4>{% trans %}Create an event{% endtrans %}</h4>
             </div>
         </div>
         {% include "include/article_form.html.twig" %}

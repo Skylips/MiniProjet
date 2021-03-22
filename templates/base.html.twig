@@ -20,15 +20,15 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('article_add') }}">Créer un événement</a></li>
-                        <li><a href="/admin">Administration</a></li>
+                        <li><a href="{{ path('article_add') }}">{{'Create an event' | trans}}</a></li>
+                        <li><a href="/admin">{% trans %}Administrator{% endtrans %}</a></li>
                     {% endif %}
-                    <li><a href="/logout">Déconnexion</a></li>
+                    <li><a href="/logout">{{'Logout' | trans}}</a></li>
                 {% else %}
-                    <li><a href="/login">Connexion</a></li>
-                    <li><a href="{{ path('article_createAccount') }}">Create Account</a></li>
+                    <li><a href="/login">{{'Login' | trans}}</a></li>
+                    <li><a href="{{ path('article_createAccount') }}">{{'Create an account' | trans}}</a></li>
                 {% endif %}
-            </ul>>
+            </ul>
         </div>
     </div>
 </nav>
