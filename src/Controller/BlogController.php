@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
+use App\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +19,12 @@ class BlogController extends AbstractController
 
     public function add()
     {
-        return $this->render('site/add.html.twig');
+        $event = new Evenement();
+        $form = $this->createForm(EvenementType::class, $event);
+
+        return $this->render('site/add.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     public function show($url)
