@@ -6,9 +6,10 @@ use App\Repository\EvenementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=EvenementRepository::class)
+ * @ORM\Entity(repositoryClass=App\Repository\EvenementRepository::class)
  */
 class Evenement
 {
@@ -25,6 +26,7 @@ class Evenement
     private $picture;
 
     /**
+     * @Assert\NotBlank(message="Ce champ ne peut pas etre vide.")
      * @ORM\Column(type="string", length=255)
      */
     private $title;
