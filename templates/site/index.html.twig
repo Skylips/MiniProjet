@@ -8,11 +8,22 @@
     <div class="container">
         <div class="row">
             {% for evenement in evenements %}
-                <div class="col s12 m4 l3">
+                <div class="col s12 m4 l12">
                     <div class="evenement-card">
-                        <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">
-                        <h2><a href="{{ path('article_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></h2>
-                        <span class="date">{{ evenement.publicationDate|date('d/m/Y') }}</span>
+                        <table>
+                            <thead></thead>
+                            <tr>
+                                <th><img src="{{ asset('uploads/' ~ evenement.picture) }}" class="center"></th>
+                            </tr>
+                            </tr>
+                                <th>Nom de l'evenement :</th>
+                                <th><a href="{{ path('article_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></th>
+                            </tr>
+                            <tr>
+                                <th>Date de l'evenement :</th>
+                                <th><span class="date">{{ evenement.dateEvent|date('d/m/Y') }}</span></th>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             {% endfor %}

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 class BlogController extends AbstractController
@@ -20,15 +21,17 @@ class BlogController extends AbstractController
     {
         $event = $this->getDoctrine()->getRepository(Evenement::class)->findBy(
             ['isPublished' => true],
-            ['publicationDate' => 'desc']
+            ['dateEvent' => 'asc']
         );
 
-        return $this->render('site/index.html.twig', ['evenements' => $event]);
+        return $this->render('site/index.html.twig',
+            ['evenements' => $event]
+        );
     }
 
-    public function add(Request $request)
+    public function add(Request $request, UserInterface $user)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        //$this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $event = new Evenement();
         $form = $this->createForm(EvenementType::class, $event);
@@ -36,6 +39,7 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $event->setLastUpdateDate(new \DateTime());
+            $event->setCreateur($user);
 
             if ($event->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
@@ -61,7 +65,7 @@ class BlogController extends AbstractController
             $em->persist($event);
             $em->flush();
 
-            //return new Response('L\'evenement a bien été enregistrer.');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('site/add.html.twig', [
@@ -76,9 +80,22 @@ class BlogController extends AbstractController
         ]);
     }
 
-    /**
-     * @IsGranted("ROLE_ADMIN")
-     */
+    public function ownEvent(UserInterface $user)
+    {
+        $events = $this->getDoctrine()->getRepository(Evenement::class)->findBy(
+            [],
+            ['lastUpdateDate' => 'DESC']
+        );
+
+        return $this->render('site/ownEvent.html.twig', [
+            'evenements' => $events,
+            'user' => $user
+        ]);
+    }
+
+//    /**
+//     * @IsGranted("ROLE_ADMIN")
+//     */
     public function edit(Evenement $event, Request $request)
     {
         $oldPicture = $event->getPicture();
@@ -115,7 +132,7 @@ class BlogController extends AbstractController
             $em->persist($event);
             $em->flush();
 
-            //return new Response('L\'evenement a bien été modifie.');
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('site/edit.html.twig', [
@@ -126,7 +143,14 @@ class BlogController extends AbstractController
 
     public function remove($id)
     {
-        return new Response('<h1>Delete evenement: ' .$id. '</h1>');
+        $entityManager = $this->getDoctrine()->getManager();
+        $event = $entityManager->getRepository(Evenement::class)->find($id);
+        $entityManager->remove($event);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("/");
+
+        //return new Response('<h1>Delete evenement: ' .$id. '</h1>');
     }
 
     public function admin()

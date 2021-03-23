@@ -5,22 +5,24 @@
 {% block title %}{{ evenement.title }}{% endblock %}
 
 {% block content %}
-    <article class="container">
-        <div class="row">
-            <div class="col s12 m12 l8 offset-l2">
-                <h2>{{ evenement.title }}</h2>
-                <span>{{ evenement.publicationDate|date('d/m/Y') }}</span>
-                <p>
-                    <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">
-                </p>
-                <span class="categories">{% for category in evenement.categorie %} {{ category.label }}{{ loop.last ? '' : ',' }} {% endfor %}</span>
+{#    {% if user==null %}#}
+        <article class="container">
+            <div class="row">
+                <div class="col s12 m12 l8 offset-l2">
+                    <h2>{{ evenement.title }}</h2>
+                    <span>{{ evenement.publicationDate|date('d/m/Y') }}</span>
+                    <p>
+                        <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">
+                    </p>
+                    <span class="categories">{% for category in evenement.categorie %} {{ category.label }}{{ loop.last ? '' : ',' }} {% endfor %}</span>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12 m12 l8 offset-l2">
-                <p>
-                    {{ evenement.content }}
-                </p>
-            </div>
-    </article>
+            <div class="row">
+                <div class="col s12 m12 l8 offset-l2">
+                    <p>
+                        {{ evenement.content }}
+                    </p>
+                </div>
+        </article>
+{#    {% endif %}#}
 {% endblock %}

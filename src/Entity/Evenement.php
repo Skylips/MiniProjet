@@ -56,6 +56,16 @@ class Evenement
      */
     private $categorie;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateEvent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="evenements")
+     */
+    private $createur;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -158,6 +168,30 @@ class Evenement
     public function removeCategorie(Category $categorie): self
     {
         $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    public function getDateEvent(): ?\DateTimeInterface
+    {
+        return $this->dateEvent;
+    }
+
+    public function setDateEvent(\DateTimeInterface $dateEvent): self
+    {
+        $this->dateEvent = $dateEvent;
+
+        return $this;
+    }
+
+    public function getCreateur(): ?User
+    {
+        return $this->createur;
+    }
+
+    public function setCreateur(?User $createur): self
+    {
+        $this->createur = $createur;
 
         return $this;
     }

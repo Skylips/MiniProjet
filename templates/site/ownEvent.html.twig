@@ -1,0 +1,49 @@
+{# templates/site/ownEvent.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}My Event | {{ parent() }}{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <a href="{{ path('article_add') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+                    <h5>{% trans %}Evenement{% endtrans %}</h5>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>{% trans %}Title{% endtrans %}</th>
+                            <th>{% trans %}Published{% endtrans %}</th>
+                            <th>{% trans %}Publication date{% endtrans %}</th>
+                            <th>{% trans %}Event date{% endtrans %}</th>
+                            <th>{% trans %}Created by{% endtrans %}</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
+                        </tr>
+                        {% set i = 1 %}
+                        {% for evenement in evenements %}
+                            {% if evenement.createur.email == user.email %}
+                                <tr>
+                                    <td>{{ i }}</td>
+                                    <td><a href="" target="_blank">{{ evenement.title }}</a></td>
+                                    <td>
+                                        <span class="badge {{ evenement.isPublished ? 'blue' : 'red' }}">
+                                            {{ evenement.isPublished ? 'oui' : 'non' }}
+                                        </span>
+                                    </td>
+                                    <td>{{ evenement.isPublished ? evenement.publicationDate|date('d/m/Y') : '-' }}</td>
+                                    <td>{{ evenement.dateEvent|date('d/m/Y') }}</td>
+                                    <td>{{ evenement.createur.getUsername()}}</td>
+                                    <td>
+                                        <a href="{{ path('article_edit', {'id': evenement.id}) }}"><i class="material-icons blue-text">edit</i></a>
+                                        <a href="{{ path('article_remove', {'id': evenement.id}) }}"><i class="material-icons red-text">delete</i></a>
+                                    </td>
+                                </tr>
+                                {% set i = i+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -15,12 +15,17 @@
 <body>
 <nav>
     <div class="nav-wrapper">
+        <a href="{{ path('homepage') }}" class="brand-logo">Social Blog</a>
         <div class="container">
-            <a href="{{ path('homepage') }}" class="brand-logo">Social Blog</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                {% if app.user %}
+                    <li><a href="/ownEvent">{{'Show my event' | trans}}</a></li>
+                {% endif %}
+            </ul>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if app.user %}
+                    <li><a href="{{ path('article_add') }}">{{'Create an event' | trans}}</a></li>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('article_add') }}">{{'Create an event' | trans}}</a></li>
                         <li><a href="/admin">{% trans %}Administrator{% endtrans %}</a></li>
                     {% endif %}
                     <li><a href="/logout">{{'Logout' | trans}}</a></li>
@@ -40,8 +45,8 @@
                 <div class="col s12 m4 l3">
                     <div class="evenement-card">
                         <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">
-                        <h2><a href="{{ path('evenement_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></h2>
-                        <span class="date">{{ evenement.publicationDate|date('d/m/Y') }}</span>
+                        <h2><a href="{{ path('article_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></h2>
+                        <span class="date">{{ evenement.dateEvent|date('d/m/Y') }}</span>
                     </div>
                 </div>
             {% endfor %}

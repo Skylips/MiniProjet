@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,6 +26,7 @@ class EvenementType extends AbstractType
             ->add('title', TextType::class, ['required' => false])
             ->add('content', TextareaType::class, ['required' => false])
             ->add('isPublished', CheckboxType::class, ['required' => false])
+            ->add('dateEvent', DateType::class, ['required' => false])
             ->add('categorie', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'label',

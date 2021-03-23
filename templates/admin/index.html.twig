@@ -17,7 +17,8 @@
                             <th>{% trans %}Title{% endtrans %}</th>
                             <th>{% trans %}Published{% endtrans %}</th>
                             <th>{% trans %}Publication date{% endtrans %}</th>
-                            <th>{% trans %}Modification date{% endtrans %}</th>
+                            <th>{% trans %}Event date{% endtrans %}</th>
+                            <th>{% trans %}Created by{% endtrans %}</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
                         {% set i = 1 %}
@@ -31,7 +32,8 @@
                                     </span>
                                 </td>
                                 <td>{{ evenement.isPublished ? evenement.publicationDate|date('d/m/Y') : '-' }}</td>
-                                <td>{{ evenement.lastUpdateDate|date('d/m/Y') }}</td>
+                                <td>{{ evenement.dateEvent|date('d/m/Y') }}</td>
+                                <td>{{ evenement.createur.getUsername()}}</td>
                                 <td>
                                     <a href="{{ path('article_edit', {'id': evenement.id}) }}"><i class="material-icons blue-text">edit</i></a>
                                     <a href="{{ path('article_remove', {'id': evenement.id}) }}"><i class="material-icons red-text">delete</i></a>
