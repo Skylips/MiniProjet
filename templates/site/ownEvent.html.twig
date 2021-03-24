@@ -8,14 +8,15 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <a href="{{ path('article_add') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+                    <a href="{{ path('article_add') }}" class="btn btn blue darken-4" style="float: right">
+                        <span>{{ 'Add an event'| trans}}</span></a>
                     <h5>{% trans %}Evenement{% endtrans %}</h5>
                     <table>
                         <tr>
                             <th>ID</th>
                             <th>{% trans %}Title{% endtrans %}</th>
                             <th>{% trans %}Published{% endtrans %}</th>
-                            <th>{% trans %}Publication date{% endtrans %}</th>
+                            <th>{% trans %}Place{% endtrans %}</th>
                             <th>{% trans %}Event date{% endtrans %}</th>
                             <th>{% trans %}Created by{% endtrans %}</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
@@ -31,7 +32,7 @@
                                             {{ evenement.isPublished ? 'oui' : 'non' }}
                                         </span>
                                     </td>
-                                    <td>{{ evenement.isPublished ? evenement.publicationDate|date('d/m/Y') : '-' }}</td>
+                                    <td>{{ evenement.Place }}</td>
                                     <td>{{ evenement.dateEvent|date('d/m/Y') }}</td>
                                     <td>{{ evenement.createur.getUsername()}}</td>
                                     <td>

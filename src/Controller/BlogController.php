@@ -167,4 +167,16 @@ class BlogController extends AbstractController
             'users' => $users
         ]);
     }
+
+    /**
+     * @Route("/change-locale/{locale}", name="change_locale")
+     */
+    public function changeLocale($locale, Request $request){
+//      On stocke la langue demandé
+        $request->getSession()->set('_locale',$locale);
+
+//      On revient sur la page précédente
+        return $this->redirectToRoute('homepage');
+//        return $this->render($request->headers->get('referer'));
+    }
 }

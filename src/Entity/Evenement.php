@@ -66,6 +66,11 @@ class Evenement
      */
     private $createur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Place;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -192,6 +197,18 @@ class Evenement
     public function setCreateur(?User $createur): self
     {
         $this->createur = $createur;
+
+        return $this;
+    }
+
+    public function getPlace(): ?string
+    {
+        return $this->Place;
+    }
+
+    public function setPlace(string $Place): self
+    {
+        $this->Place = $Place;
 
         return $this;
     }

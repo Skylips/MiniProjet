@@ -2,11 +2,11 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}{{ 'Connexion'| trans}}{% endblock %}
 
 {% block content %}
     <div class="container center">
-        <h1>Connexion</h1>
+        <h1>{{ 'Login'| trans}}</h1>
         <form method="post" class="row">
             {% if error %}
                 <div class="col s12 m6 l6 offset-m3 offset-l3">
@@ -20,10 +20,10 @@
                 </div>
             {% endif %}
             <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" required autofocus placeholder="Adresse email">
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" required autofocus placeholder={{'Mail' | trans}}>
             </div>
             <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
-                <input type="password" name="password" id="inputPassword" class="form-control" required placeholder="Mot de passe">
+                <input type="password" name="password" id="inputPassword" class="form-control" required placeholder="{{'Password' | trans}}">
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -40,7 +40,7 @@
             #}
 
             <div class="input-field col s12">
-                <input type="submit" class="btn btn-primary" value="Me connecter">
+                <input type="submit" class="btn btn-primary" value="{{ 'Login'| trans}}">
             </div>
         </form>
     </div>

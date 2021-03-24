@@ -2,27 +2,28 @@
 
 {% extends "base.html.twig" %}
 
-{% block title %}{{ evenement.title }}{% endblock %}
+{% block title %}Event | {{ evenement.title }}{% endblock %}
 
 {% block content %}
 {#    {% if user==null %}#}
         <article class="container">
             <div class="row">
                 <div class="col s12 m12 l8 offset-l2">
-                    <h2>{{ evenement.title }}</h2>
-                    <span>{{ evenement.publicationDate|date('d/m/Y') }}</span>
                     <p>
                         <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">
                     </p>
+                    <h5>{{ 'Name of the event'  | trans}}:</h5>
+                    <span>{{ evenement.title }}</span><br>
+                    <h5>{{ 'Date of the event' | trans}} :</h5>
+                    <span>{{ evenement.publicationDate|date('d/m/Y') }}</span>
+                    <h5>{{ 'Type of event' | trans}}:</h5>
                     <span class="categories">{% for category in evenement.categorie %} {{ category.label }}{{ loop.last ? '' : ',' }} {% endfor %}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m12 l8 offset-l2">
                     <p>
+                        <h5>Descritpion : </h5>
                         {{ evenement.content }}
                     </p>
                 </div>
+            </div>
         </article>
 {#    {% endif %}#}
 {% endblock %}

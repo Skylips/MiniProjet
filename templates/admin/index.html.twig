@@ -17,6 +17,7 @@
                             <th>{% trans %}Title{% endtrans %}</th>
                             <th>{% trans %}Published{% endtrans %}</th>
                             <th>{% trans %}Publication date{% endtrans %}</th>
+                            <th>{% trans %}Place{% endtrans %}</th>
                             <th>{% trans %}Event date{% endtrans %}</th>
                             <th>{% trans %}Created by{% endtrans %}</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
@@ -32,6 +33,7 @@
                                     </span>
                                 </td>
                                 <td>{{ evenement.isPublished ? evenement.publicationDate|date('d/m/Y') : '-' }}</td>
+                                <td>{{ evenement.Place }}</td>
                                 <td>{{ evenement.dateEvent|date('d/m/Y') }}</td>
                                 <td>{{ evenement.createur.getUsername()}}</td>
                                 <td>

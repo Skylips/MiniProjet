@@ -5,6 +5,17 @@
 {% block title %}Accueil | {{ parent() }}{% endblock %}
 
 {% block content %}
+{#    <div class="jumbotron">#}
+{#        <div class="container">#}
+{#            {{ form_start(form) }}#}
+{#                <div class="form-row">#}
+{#                    <div class="col">#}
+{#                        {{ form_row() }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            {{ form_end }}#}
+{#        </div>#}
+{#    </div>#}
     <div class="container">
         <div class="row">
             {% for evenement in evenements %}
@@ -16,12 +27,16 @@
                                 <th><img src="{{ asset('uploads/' ~ evenement.picture) }}" class="center"></th>
                             </tr>
                             </tr>
-                                <th>Nom de l'evenement :</th>
+                                <th>{{ 'Name of the event'| trans}} :</th>
                                 <th><a href="{{ path('article_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></th>
                             </tr>
                             <tr>
-                                <th>Date de l'evenement :</th>
+                                <th>{{ 'Date of the event'| trans}} :</th>
                                 <th><span class="date">{{ evenement.dateEvent|date('d/m/Y') }}</span></th>
+                            </tr>
+                            <tr>
+                                <th>{{ 'Place of the event'| trans}} :</th>
+                                <th><span class="date">{{ evenement.Place }}</span></th>
                             </tr>
                         </table>
                     </div>
