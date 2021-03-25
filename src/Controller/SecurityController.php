@@ -45,4 +45,13 @@ class SecurityController extends AbstractController
 
         return $this->redirect($request->headers->get('referer'));
     }
+
+    public function verifyUser($id, Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $user->setIsVerified(true);
+        $entityManager->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 }

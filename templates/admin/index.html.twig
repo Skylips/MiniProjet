@@ -54,6 +54,7 @@
                             <th>{% trans %}Email address{% endtrans %}</th>
                             <th>{% trans %}Username{% endtrans %}</th>
                             <th>{% trans %}Roles{% endtrans %}</th>
+                            <th>{% trans %}Verified{% endtrans %} ?</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
                         {% for user in users %}
@@ -66,6 +67,16 @@
                                         {{ user.roles[0] }}
                                     </span>
                                 </td>
+                                <td>
+                                    <span class="roles {{ user.isVerified ? 'green' : 'red' }}">
+                                        {% if user.isVerified %}
+                                            {% trans %}Yes{% endtrans %}
+                                        {% else %}
+                                            <a href="{{ path('user_verify', {'id': user.id}) }}">
+                                                {% trans %}No{% endtrans %}
+                                            </a>
+                                        {% endif %}
+                                    </span>
                                 <td>
                                     {% if user.roles[0] != "ROLE_ADMIN" %}
                                         <a href="{{ path('user_remove', {'id': user.id}) }}">

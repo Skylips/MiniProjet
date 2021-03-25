@@ -40,6 +40,12 @@ user_remove:
   requirements:
     id: '\d+'
 
+user_verify:
+  path: /verifyUser/{id}
+  controller: App\Controller\SecurityController::verifyUser
+  requirements:
+    id: '\d+'
+
 comment_remove:
   path: /removeComment/{id}
   controller: App\Controller\UserController::removeComment

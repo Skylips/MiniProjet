@@ -76,8 +76,6 @@ class BlogController extends AbstractController
 
     public function show(Evenement $evenement, UserInterface $user)
     {
-
-
         return $this->render('site/show.html.twig', [
             'evenement' => $evenement,
             'commentaires' => $evenement->getCommentaires(),
