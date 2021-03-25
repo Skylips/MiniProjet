@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | {% trans %}Add a comment{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h4>{% trans %}Add a comment{% endtrans %}</h4>
+            </div>
+        </div>
+        {% include "include/article_comment.html.twig" %}
+    </div>
+{% endblock %}

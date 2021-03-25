@@ -1,10 +1,11 @@
 <?php
 
-
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Evenement;
 use App\Entity\User;
+use App\Form\CommentaireType;
 use App\Form\EvenementType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,22 +74,13 @@ class BlogController extends AbstractController
         ]);
     }
 
-    public function show(Evenement $evenement)
+    public function show(Evenement $evenement, UserInterface $user)
     {
+
+
         return $this->render('site/show.html.twig', [
-            'evenement' => $evenement
-        ]);
-    }
-
-    public function ownEvent(UserInterface $user)
-    {
-        $events = $this->getDoctrine()->getRepository(Evenement::class)->findBy(
-            [],
-            ['lastUpdateDate' => 'DESC']
-        );
-
-        return $this->render('site/ownEvent.html.twig', [
-            'evenements' => $events,
+            'evenement' => $evenement,
+            'commentaires' => $evenement->getCommentaires(),
             'user' => $user
         ]);
     }
@@ -141,15 +133,15 @@ class BlogController extends AbstractController
         ]);
     }
 
-    public function remove($id)
+    public function remove($id, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $event = $entityManager->getRepository(Evenement::class)->find($id);
         $entityManager->remove($event);
         $entityManager->flush();
 
-        return $this->redirectToRoute("/");
-
+//        return $this->redirectToRoute("/");
+        return $this->redirect($request->headers->get('referer'));
         //return new Response('<h1>Delete evenement: ' .$id. '</h1>');
     }
 
@@ -162,9 +154,12 @@ class BlogController extends AbstractController
 
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
+        $comments = $this->getDoctrine()->getRepository(Commentaire::class)->findAll();
+
         return $this->render('admin/index.html.twig', [
             'evenements' => $events,
-            'users' => $users
+            'users' => $users,
+            'comments' => $comments
         ]);
     }
 

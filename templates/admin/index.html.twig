@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <a href="{{ path('article_add') }}" class="btn btn blue darken-4" style="float: right">Ajouter</a>
+                    <a href="{{ path('article_add') }}" class="btn btn blue darken-4" style="float: right">{% trans %}Add an event{% endtrans %}</a>
                     <h5>{% trans %}Evenement{% endtrans %}</h5>
                     <table>
                         <tr>
@@ -22,10 +22,9 @@
                             <th>{% trans %}Created by{% endtrans %}</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
-                        {% set i = 1 %}
                         {% for evenement in evenements %}
                             <tr>
-                                <td>{{ i }}</td>
+                                <td>{{ evenement.id }}</td>
                                 <td><a href="" target="_blank">{{ evenement.title }}</a></td>
                                 <td>
                                     <span class="badge {{ evenement.isPublished ? 'blue' : 'red' }}">
@@ -37,11 +36,10 @@
                                 <td>{{ evenement.dateEvent|date('d/m/Y') }}</td>
                                 <td>{{ evenement.createur.getUsername()}}</td>
                                 <td>
-                                    <a href="{{ path('article_edit', {'id': evenement.id}) }}"><i class="material-icons blue-text">edit</i></a>
-                                    <a href="{{ path('article_remove', {'id': evenement.id}) }}"><i class="material-icons red-text">delete</i></a>
+                                    <a href="{{ path('article_edit', {'id': evenement.id}) }}"><i class="material-icons blue-text">{% trans %}Edit{% endtrans %}</i></a>
+                                    <a href="{{ path('article_remove', {'id': evenement.id}) }}"><i class="material-icons red-text">{% trans %}Delete{% endtrans %}</i></a>
                                 </td>
                             </tr>
-                            {% set i = i+1 %}
                         {% endfor %}
                     </table>
                 </div>
@@ -58,10 +56,9 @@
                             <th>{% trans %}Roles{% endtrans %}</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
-                        {% set i = 1 %}
                         {% for user in users %}
                             <tr>
-                                <td>{{ i }}</td>
+                                <td>{{ user.id }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.username }}</td>
                                 <td>
@@ -70,10 +67,43 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a href=""><i class="material-icons red-text">delete</i></a>
+                                    {% if user.roles[0] != "ROLE_ADMIN" %}
+                                        <a href="{{ path('user_remove', {'id': user.id}) }}">
+                                            <i class="material-icons red-text">
+                                                {% trans %}Delete{% endtrans %}
+                                            </i>
+                                        </a>
+                                    {% endif %}
                                 </td>
                             </tr>
-                            {% set i = i+1 %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m-t-30">
+                    <h5>{% trans %}Comments{% endtrans %}</h5>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>{% trans %}Published By{% endtrans %}</th>
+                            <th>{% trans %}Content{% endtrans %}</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
+                        </tr>
+                        {% for comment in comments %}
+                            <tr>
+                                <td>{{ comment.id }}</td>
+                                <td>{{ comment.creator.username }}</td>
+                                <td>{{ comment.contenu }}</td>
+                                <td>
+                                    <a href="{{ path('comment_remove', {'id': comment.id}) }}">
+                                        <i class="material-icons red-text">
+                                            {% trans %}Delete{% endtrans %}
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
                         {% endfor %}
                     </table>
                 </div>

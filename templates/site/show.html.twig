@@ -1,5 +1,3 @@
-{# templates/blog/show.html.twig #}
-
 {% extends "base.html.twig" %}
 
 {% block title %}Event | {{ evenement.title }}{% endblock %}
@@ -16,12 +14,44 @@
                     <span>{{ evenement.title }}</span><br>
                     <h5>{{ 'Date of the event' | trans}} :</h5>
                     <span>{{ evenement.publicationDate|date('d/m/Y') }}</span>
-                    <h5>{{ 'Type of event' | trans}}:</h5>
+                    <h5>{{ 'Type of event' | trans}} :</h5>
                     <span class="categories">{% for category in evenement.categorie %} {{ category.label }}{{ loop.last ? '' : ',' }} {% endfor %}</span>
                     <p>
                         <h5>Descritpion : </h5>
                         {{ evenement.content }}
                     </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m-t-30">
+                    <h4>{% trans %}Comments{% endtrans %}</h4>
+                    <table>
+                        {% if app.user %}
+                            <a href="{{ path('comment_add', {'id': evenement.id}) }}" class="btn btn blue darken-4" style="float: right">{% trans %}Add a comment{% endtrans %}</a>
+                        {% endif %}
+                        <tr>
+                            <th>{% trans %}Written By{% endtrans %}</th>
+                            <th>{% trans %}Content{% endtrans %}</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
+                        </tr>
+                        {% for commentaire in commentaires %}
+                            <tr>
+                                <td>{{ commentaire.creator.username }}</td>
+                                <td>{{ commentaire.contenu }}</td>
+                                {% if user.id==commentaire.creator.id %}
+                                    <td>
+                                        <a href="{{ path('comment_remove', {'id': commentaire.id}) }}">
+                                            <i class="material-icons red-text">{% trans %}Delete{% endtrans %}</i>
+                                        </a>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        -
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         </article>

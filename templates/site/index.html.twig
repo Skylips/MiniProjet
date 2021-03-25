@@ -2,7 +2,7 @@
 
 {% extends "base.html.twig" %}
 
-{% block title %}Accueil | {{ parent() }}{% endblock %}
+{% block title %}{{ 'Home' | trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
 {#    <div class="jumbotron">#}
@@ -37,6 +37,10 @@
                             <tr>
                                 <th>{{ 'Place of the event'| trans}} :</th>
                                 <th><span class="date">{{ evenement.Place }}</span></th>
+                            </tr>
+                            <tr>
+                                <th>{{ 'Created by'| trans}} :</th>
+                                <th><span class="date">{{ evenement.createur.username }}</span></th>
                             </tr>
                         </table>
                     </div>

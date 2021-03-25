@@ -8,13 +8,19 @@ article_add:
   path: /add
   controller: App\Controller\BlogController::add
 
+comment_add:
+  path: /comment/{id}
+  controller: App\Controller\UserController::addComment
+  requirements:
+    id: '\d+'
+
 article_show:
   path: /show/{id}
   controller: App\Controller\BlogController::show
 
 article_own_event:
   path: /ownEvent
-  controller: App\Controller\BlogController::ownEvent
+  controller: App\Controller\UserController::ownEvent
 
 article_edit:
   path: /edit/{id}
@@ -25,6 +31,18 @@ article_edit:
 article_remove:
   path: /remove/{id}
   controller: App\Controller\BlogController::remove
+  requirements:
+    id: '\d+'
+
+user_remove:
+  path: /removeUser/{id}
+  controller: App\Controller\SecurityController::removeUser
+  requirements:
+    id: '\d+'
+
+comment_remove:
+  path: /removeComment/{id}
+  controller: App\Controller\UserController::removeComment
   requirements:
     id: '\d+'
 

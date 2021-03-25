@@ -53,9 +53,15 @@ class User implements UserInterface
      */
     private $evenements;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="creator")
+     */
+    private $commentaires;
+
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,7 +88,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -191,6 +197,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($evenement->getCreateur() === $this) {
                 $evenement->setCreateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getCreator() === $this) {
+                $commentaire->setCreator(null);
             }
         }
 

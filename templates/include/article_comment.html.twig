@@ -1,0 +1,11 @@
+{{ form_start(form, {'attr': {'class': 'row'}}) }}
+
+<div class="input-field col s12 m12 l12">
+    {{ form_widget(form.contenu) }}
+    <span class="error">{{ form_errors(form.contenu) }}</span>
+</div>
+
+<div class="input-field col s12 m12 l12">
+    <input type="submit" name="" value={{ 'Save'| trans}} class="btn btn-primary">
+</div>
+{{ form_end(form) }}

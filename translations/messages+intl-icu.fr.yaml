@@ -15,19 +15,29 @@ Users: Utilisateurs
 Username: 'Nom utilisateur'
 Roles: Rôles
 Place: Lieux
-'Event date': "Date de l'événement"
-'Created by': 'Créer par'
+'Event date': 'Date de l''événement'
+'Created by': 'Créé par'
 'Show my event': 'Montrer mes événements'
-'Name of the event': "Nom de l'événement"
-'Date of the event': "Date  de l'événement"
-'Type of event': "Catégorie de l'événement"
-'Choose one or more categories': "Choisie une ou plusieurs catégorie"
+'Name of the event': 'Nom de l''événement'
+'Date of the event': 'Date  de l''événement'
+'Type of event': 'Catégorie de l''événement'
+'Choose one or more categories': 'Choisie une ou plusieurs catégorie'
 Descripiton: Descripiton
-'Place of the event': "Lieux de l'événement"
+'Place of the event': 'Lieux de l''événement'
 Registration: Inscription
-Register: S'incrire
+Register: 'S"incrire'
 Save: Sauvegarder
-Publish the event: "Publier l'événement"
-Password: "Mot de passe"
-Mail: "Adresse e-mail"
-Modify the event: "Modifier les événements"
+'Publish the event': 'Publier l''événement'
+Password: 'Mot de passe'
+Mail: 'Adresse e-mail'
+'Modify the event': 'Modifier les événements'
+Home: Accueil
+Connexion: Connexion
+Comments: Commentaires
+'Add a comment': 'Ajouter un commentaire'
+'Written By': 'Ecrit par'
+Contenu: Contenu
+Delete: Supprimer
+Edit: Editer
+'Published By': 'Publié par'
+Content: Contenu
