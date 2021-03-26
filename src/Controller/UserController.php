@@ -18,9 +18,14 @@ class UserController extends AbstractController
             ['lastUpdateDate' => 'DESC']
         );
 
+        $commentary = $this->getDoctrine()->getRepository(Commentaire::class)->findBy(
+            [],[]
+        );
+
         return $this->render('site/ownEvent.html.twig', [
             'evenements' => $events,
-            'user' => $user
+            'user' => $user,
+            'comments' => $commentary
         ]);
     }
 

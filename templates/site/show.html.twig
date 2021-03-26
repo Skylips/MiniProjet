@@ -32,12 +32,14 @@
                         <tr>
                             <th>{% trans %}Written By{% endtrans %}</th>
                             <th>{% trans %}Content{% endtrans %}</th>
+                            <th>{% trans %}Publication Time{% endtrans %}</th>
                             <th>{% trans %}Actions{% endtrans %}</th>
                         </tr>
                         {% for commentaire in commentaires %}
                             <tr>
                                 <td>{{ commentaire.creator.username }}</td>
                                 <td>{{ commentaire.contenu }}</td>
+                                <td>{{ commentaire.createdAt.format('H:i | d-m-Y') }}</td>
                                 {% if user.id==commentaire.creator.id %}
                                     <td>
                                         <a href="{{ path('comment_remove', {'id': commentaire.id}) }}">
@@ -45,9 +47,7 @@
                                         </a>
                                     </td>
                                 {% else %}
-                                    <td>
-                                        -
-                                    </td>
+                                    <td>-</td>
                                 {% endif %}
                             </tr>
                         {% endfor %}

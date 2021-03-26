@@ -167,7 +167,6 @@ class BlogController extends AbstractController
         $request->getSession()->set('_locale',$locale);
 
 //      On revient sur la page précédente
-        return $this->redirectToRoute('homepage');
-//        return $this->render($request->headers->get('referer'));
+        return $this->redirect($request->headers->get('referer'));
     }
 }

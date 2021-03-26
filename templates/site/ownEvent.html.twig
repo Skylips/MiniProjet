@@ -10,7 +10,7 @@
                 <div class="col s12">
                     <a href="{{ path('article_add') }}" class="btn btn blue darken-4" style="float: right">
                         <span>{{ 'Add an event'| trans}}</span></a>
-                    <h5>{% trans %}Evenement{% endtrans %}</h5>
+                    <h5>{% trans %}Events{% endtrans %}</h5>
                     <table>
                         <tr>
                             <th>ID</th>
@@ -36,8 +36,33 @@
                                     <td>{{ evenement.dateEvent|date('d/m/Y') }}</td>
                                     <td>{{ evenement.createur.getUsername()}}</td>
                                     <td>
-                                        <a href="{{ path('article_edit', {'id': evenement.id}) }}"><i class="material-icons blue-text">edit</i></a>
-                                        <a href="{{ path('article_remove', {'id': evenement.id}) }}"><i class="material-icons red-text">delete</i></a>
+                                        <a href="{{ path('article_edit', {'id': evenement.id}) }}"><i class="material-icons blue-text">{% trans %}Edit{% endtrans %}</i></a>
+                                        <a href="{{ path('article_remove', {'id': evenement.id}) }}"><i class="material-icons red-text">{% trans %}Delete{% endtrans %}</i></a>
+                                    </td>
+                                </tr>
+                                {% set i = i+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+                    <h5>{% trans %}Comments{% endtrans %}</h5>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>{% trans %}Event{% endtrans %}</th>
+                            <th>{% trans %}Content{% endtrans %}</th>
+                            <th>{% trans %}Publication Time{% endtrans %}</th>
+                            <th>{% trans %}Actions{% endtrans %}</th>
+                        </tr>
+                        {% set i = 1 %}
+                        {% for comment in comments %}
+                            {% if comment.creator.email == user.email %}
+                                <tr>
+                                    <td>{{ comment.id }}</td>
+                                    <td>{{ comment.event.title }}</td>
+                                    <td>{{ comment.contenu }}</td>
+                                    <td>{{ comment.createdAt.format('H:i | d-m-Y')  }}</td>
+                                    <td>
+                                        <a href="{{ path('comment_remove', {'id': comment.id}) }}"><i class="material-icons red-text">{% trans %}Delete{% endtrans %}</i></a>
                                     </td>
                                 </tr>
                                 {% set i = i+1 %}

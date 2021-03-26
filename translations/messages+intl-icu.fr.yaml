@@ -4,7 +4,7 @@ Logout: Déconnexion
 Login: Connexion
 'Create an account': 'Créer un compte'
 'Add an event': 'Ajouter un événement'
-Evenement: Evenement
+Events: Evenements
 Title: Titre
 Published: Publier
 'Publication date': 'Date de publication'
@@ -47,3 +47,4 @@ Verified: Vérifié
 'Welcome to Social Blog': 'Bienvenue sur Social Blog'
 'Log in or create an account to access the latest events': 'Connectez-vous ou créez un compte pour accéder au derniers événements'
 'Back on the event': 'Retour sur l"événement'
+'Publication Time': 'Heure de publication'
