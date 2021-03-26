@@ -32,7 +32,6 @@ Password: 'Mot de passe'
 Mail: 'Adresse e-mail'
 'Modify the event': 'Modifier les événements'
 Home: Accueil
-Connexion: Connexion
 Comments: Commentaires
 'Add a comment': 'Ajouter un commentaire'
 'Written By': 'Ecrit par'
@@ -48,3 +47,4 @@ Verified: Vérifié
 'Log in or create an account to access the latest events': 'Connectez-vous ou créez un compte pour accéder au derniers événements'
 'Back on the event': 'Retour sur l"événement'
 'Publication Time': 'Heure de publication'
+'My events': 'Mes événement'
