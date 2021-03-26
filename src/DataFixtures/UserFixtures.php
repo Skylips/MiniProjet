@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
 
         $user2 = new User();
         $user2->setUsername('User1');
-        $user2->setEmail('User21@gmail.com');
+        $user2->setEmail('User1@gmail.com');
         $user2->setRoles(["ROLE_USER"]);
         $password2 = $this->encoder->encodePassword($user2, 'bbbbbb');
         $user2->setPassword($password2);

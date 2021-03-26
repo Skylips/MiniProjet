@@ -49,12 +49,12 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="createur")
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="createur", cascade={"remove"})
      */
     private $evenements;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="creator")
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="creator", cascade={"remove"})
      */
     private $commentaires;
 

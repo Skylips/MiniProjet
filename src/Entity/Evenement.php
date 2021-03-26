@@ -72,7 +72,7 @@ class Evenement
     private $Place;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="event")
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="event", cascade={"remove"})
      */
     private $commentaires;
 
