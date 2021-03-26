@@ -38,19 +38,23 @@ class UserController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $event = $entityManager->getRepository(Evenement::class)->find($id);
-
             $comment->setEvent($event);
-
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirect($request->headers->get('referer'));
+//            return $this->redirect($_SERVER['HTTP_REFERER']);
+
         }
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $event = $entityManager->getRepository(Evenement::class)->find($id);
+
         return $this->render('site/addComment.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'evenement' => $event
         ]);
     }
 
@@ -61,7 +65,6 @@ class UserController extends AbstractController
         $entityManager->remove($comment);
         $entityManager->flush();
 
-//       return $this->redirectToRoute("/");
         return $this->redirect($request->headers->get('referer'));
     }
 }

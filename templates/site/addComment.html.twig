@@ -10,5 +10,6 @@
             </div>
         </div>
         {% include "include/article_comment.html.twig" %}
+        <a type="submit" href="{{ path('article_show', {'id': evenement.id}) }}" class="btn btn-primary">{% trans %}Back on the event{% endtrans %}</a>
     </div>
 {% endblock %}

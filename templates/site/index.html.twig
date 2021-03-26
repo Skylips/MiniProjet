@@ -16,10 +16,11 @@
 {#            {{ form_end }}#}
 {#        </div>#}
 {#    </div>#}
+    {% if app.user %}
     <div class="container">
         <div class="row">
             {% for evenement in evenements %}
-                <div class="col s12 m4 l12">
+                <div class="col s6 m6 l12">
                     <div class="evenement-card">
                         <table>
                             <thead></thead>
@@ -48,4 +49,12 @@
             {% endfor %}
         </div>
     </div>
+
+    {% else %}
+        <div class="center">
+            <img src="{{ asset('img/group.png') }}">
+            <h1>{{ 'Welcome to Social Blog' | trans}}</h1>
+            <h5>{{ 'Log in or create an account to access the latest events' | trans}}</h5>
+        </div>
+    {% endif %}
 {% endblock %}

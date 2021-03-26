@@ -138,9 +138,7 @@ class BlogController extends AbstractController
         $entityManager->remove($event);
         $entityManager->flush();
 
-//        return $this->redirectToRoute("/");
         return $this->redirect($request->headers->get('referer'));
-        //return new Response('<h1>Delete evenement: ' .$id. '</h1>');
     }
 
     public function admin()
