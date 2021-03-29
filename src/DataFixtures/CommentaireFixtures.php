@@ -4,11 +4,13 @@ namespace App\DataFixtures;
 
 use App\Entity\Commentaire;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
-
-class CommentaireFixtures extends Fixture
+/**
+ * Permet d'ajouter des commentaires à la BDD
+ */
+class CommentaireFixtures extends Fixture implements DependentFixtureInterface
 {
     private $encoder;
 
@@ -46,5 +48,13 @@ class CommentaireFixtures extends Fixture
         $manager->flush();
 
         $this->addReference('comment1',$comment1);
+    }
+
+    public function getDependencies()
+    {
+        return [
+            EvenementFixtures::class,
+            UserFixtures::class
+        ];
     }
 }

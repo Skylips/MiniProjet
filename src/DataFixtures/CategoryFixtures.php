@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class CategoryFixtures extends Fixture
+class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
     private $encoder;
 
@@ -50,5 +51,12 @@ class CategoryFixtures extends Fixture
         $this->addReference('CULINAIRE',$category4);
         $this->addReference('THEATRE',$category5);
         $this->addReference('SORTIE COLLECTIVE',$category6);
+    }
+
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }

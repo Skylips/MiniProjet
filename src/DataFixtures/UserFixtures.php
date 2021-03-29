@@ -3,11 +3,14 @@
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
-
-class UserFixtures extends Fixture
+/**
+ * Permet d'ajouter des utilisateurs à la BDD
+ */
+class UserFixtures extends Fixture //implements OrderedFixtureInterface
 {
     private $encoder;
 
@@ -61,4 +64,8 @@ class UserFixtures extends Fixture
         $this->addReference('user2',$user3);
         $this->addReference('user3',$user4);
     }
+
+//    public function getOrder() {
+//        return 1;
+//    }
 }

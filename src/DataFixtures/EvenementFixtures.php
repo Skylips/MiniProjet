@@ -4,10 +4,13 @@ namespace App\DataFixtures;
 
 use App\Entity\Evenement;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
-class EvenementFixtures extends Fixture
+/**
+ * Permet d'ajouter des evenements à la BDD
+ */
+class EvenementFixtures extends Fixture implements DependentFixtureInterface
 {
     private $encoder;
 
@@ -52,5 +55,12 @@ class EvenementFixtures extends Fixture
         $this->addReference('event2',$event2);
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }
