@@ -10,7 +10,7 @@ use App\Entity\User;
 /**
  * Permet d'ajouter des utilisateurs à la BDD
  */
-class UserFixtures extends Fixture //implements OrderedFixtureInterface
+class UserFixtures extends Fixture
 {
     private $encoder;
 
@@ -64,8 +64,4 @@ class UserFixtures extends Fixture //implements OrderedFixtureInterface
         $this->addReference('user2',$user3);
         $this->addReference('user3',$user4);
     }
-
-//    public function getOrder() {
-//        return 1;
-//    }
 }
