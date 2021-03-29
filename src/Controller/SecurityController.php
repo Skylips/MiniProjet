@@ -16,13 +16,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
@@ -42,8 +36,8 @@ class SecurityController extends AbstractController
     public function removeUser($id, Request $request){
 
         $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(User::class)->find($id);
-        $entityManager->remove($user);
+        $user = $entityManager->getRepository(User::class)->find($id); //Cherche l'user via son ID
+        $entityManager->remove($user); //Supprime l'user
         $entityManager->flush();
 
         return $this->redirect($request->headers->get('referer'));
@@ -51,8 +45,22 @@ class SecurityController extends AbstractController
 
     public function verifyUser($id, Request $request){
         $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(User::class)->find($id);
-        $user->setIsVerified(true);
+        $user = $entityManager->getRepository(User::class)->find($id); //Cherche l'user via son ID
+        $user->setIsVerified(true); //Met l'user en vérifié
+        $entityManager->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    public function adminAuth($id, Request $request){
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);//Cherche l'user via son ID
+        $tempo = $user->getRoles();
+        if($tempo[0] == 'ROLE_USER'){ //Vérifie le role actuel du user
+            $user->setRoles(['ROLE_ADMIN']);
+        }else{
+            $user->setRoles(['ROLE_USER']);
+        }
         $entityManager->flush();
 
         return $this->redirect($request->headers->get('referer'));

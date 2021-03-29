@@ -46,6 +46,12 @@ user_verify:
   requirements:
     id: '\d+'
 
+admin_auth:
+  path: /adminAuth/{id}
+  controller: App\Controller\SecurityController::adminAuth
+  requirements:
+    id: '\d+'
+
 comment_remove:
   path: /removeComment/{id}
   controller: App\Controller\UserController::removeComment

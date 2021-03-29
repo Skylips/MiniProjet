@@ -13,11 +13,13 @@ class UserController extends AbstractController
 {
     public function ownEvent(UserInterface $user)
     {
+        //On récupère tous les événements
         $events = $this->getDoctrine()->getRepository(Evenement::class)->findBy(
             [],
             ['lastUpdateDate' => 'DESC']
         );
 
+        //On récupère tous les commentaires
         $commentary = $this->getDoctrine()->getRepository(Commentaire::class)->findBy(
             [],[]
         );

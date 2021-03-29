@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            //Code le mot de passe
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -58,22 +58,22 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/verify/email", name="app_verify_email")
      */
-    public function verifyUserEmail(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        // validate email confirmation link, sets User::isVerified=true and persists
-        try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
-
-            return $this->redirectToRoute('app_register');
-        }
-
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
-
-        return $this->redirectToRoute('app_register');
-    }
+//    public function verifyUserEmail(Request $request): Response
+//    {
+//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+//
+//        // validate email confirmation link, sets User::isVerified=true and persists
+//        try {
+//            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+//        } catch (VerifyEmailExceptionInterface $exception) {
+//            $this->addFlash('verify_email_error', $exception->getReason());
+//
+//            return $this->redirectToRoute('app_register');
+//        }
+//
+//        // @TODO Change the redirect on success and handle or remove the flash message in your templates
+//        $this->addFlash('success', 'Your email address has been verified.');
+//
+//        return $this->redirectToRoute('app_register');
+//    }
 }

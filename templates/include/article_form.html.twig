@@ -15,12 +15,14 @@
         <span>{{ 'Choose one or more categories'| trans}}</span>
         {{ form_widget(form.categorie) }}
         {{ form_label(form.categorie, ' ') }}
+        <span class="error">{{ form_errors(form.categorie) }}</span>
     </div>
 
     <div class="date col s2 m3 l6">
         <span>{{ 'Date of the event'| trans}}</span>
         {{ form_label(form.dateEvent, ' ') }}
         {{ form_widget(form.dateEvent) }}
+        <span class="error">{{ form_errors(form.dateEvent) }}</span>
     </div>
 
     {#<div class="input-field col s12 m3 l3">#}
@@ -31,12 +33,14 @@
         <span>{{ 'Place'| trans}}</span>
         {{ form_label(form.Place, ' ') }}
         {{ form_widget(form.Place) }}
+        <span class="error">{{ form_errors(form.Place) }}</span>
     </div>
 
     <div class="input-field col s12 m12 l12">
         <span>{{ 'Descripiton'| trans}}</span>
         {{ form_label(form.content, ' ') }}
         {{ form_widget(form.content, {'attr': {'class': 'materialize-textarea', 'placeholder': ' '}}) }}
+        <span class="error">{{ form_errors(form.content) }}</span>
     </div>
 
     <div class="input-field col s12 m12 l12">

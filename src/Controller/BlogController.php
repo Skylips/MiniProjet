@@ -42,6 +42,7 @@ class BlogController extends AbstractController
             $event->setLastUpdateDate(new \DateTime());
             $event->setCreateur($user);
 
+            //Vérifie si l'event a une image
             if ($event->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
@@ -58,6 +59,7 @@ class BlogController extends AbstractController
                 $event->setPicture($fileName);
             }
 
+            //Si l'event est publié, met la date d'aujourd'hui pour la variable $publicationDate
             if ($event->getIsPublished()) {
                 $event->setPublicationDate(new \DateTime());
             }
@@ -96,10 +98,12 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $event->setLastUpdateDate(new \DateTime());
 
+            //Si l'event est publié, met la date d'aujourd'hui pour la variable $publicationDate
             if ($event->getIsPublished()) {
                 $event->setPublicationDate(new \DateTime());
             }
 
+            //Vérifie si l'event a une image
             if ($event->getPicture() !== null && $event->getPicture() !== $oldPicture) {
                 $file = $form->get('picture')->getData();
                 $fileName = uniqid(). '.' .$file->guessExtension();
@@ -143,13 +147,16 @@ class BlogController extends AbstractController
 
     public function admin()
     {
+        //On récupère tous les événements
         $events = $this->getDoctrine()->getRepository(Evenement::class)->findBy(
             [],
             ['lastUpdateDate' => 'DESC']
         );
 
+        //On récupère tous les users
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
+        //On récupère tous les commentaires
         $comments = $this->getDoctrine()->getRepository(Commentaire::class)->findAll();
 
         return $this->render('admin/index.html.twig', [
@@ -163,10 +170,10 @@ class BlogController extends AbstractController
      * @Route("/change-locale/{locale}", name="change_locale")
      */
     public function changeLocale($locale, Request $request){
-//      On stocke la langue demandé
+        //On stocke la langue demandé
         $request->getSession()->set('_locale',$locale);
 
-//      On revient sur la page précédente
+        //On revient sur la page précédente
         return $this->redirect($request->headers->get('referer'));
     }
 }

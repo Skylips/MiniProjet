@@ -25,7 +25,7 @@
                         {% for evenement in evenements %}
                             <tr>
                                 <td>{{ evenement.id }}</td>
-                                <td><a href="" target="_blank">{{ evenement.title }}</a></td>
+                                <td>{{ evenement.title }}</td>
                                 <td>
                                     <span class="badge {{ evenement.isPublished ? 'blue' : 'red' }}">
                                         {{ evenement.isPublished ? 'oui' : 'non' }}
@@ -64,7 +64,21 @@
                                 <td>{{ user.username }}</td>
                                 <td>
                                     <span class="roles {{ user.roles[0] == "ROLE_ADMIN" ? 'blue' : 'green' }}">
-                                        {{ user.roles[0] }}
+                                        {% if user.roles[0] == "ROLE_ADMIN" %}
+                                            {% if user.email != "admin@gmail.com"%}
+                                                <a href="{{ path('admin_auth', {'id': user.id}) }}" style="color:#e0e0e0;">
+                                                    {{ user.roles[0] }}
+                                                </a>
+                                            {% else %}
+                                                <a style="color:#000000;">
+                                                    ROLE_SUPER_ADMIN
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="{{ path('admin_auth', {'id': user.id}) }}" style="color:#e0e0e0;">
+                                                {{ user.roles[0] }}
+                                            </a>
+                                        {% endif %}
                                     </span>
                                 </td>
                                 <td>
@@ -72,7 +86,7 @@
                                         {% if user.isVerified %}
                                             {% trans %}Yes{% endtrans %}
                                         {% else %}
-                                            <a href="{{ path('user_verify', {'id': user.id}) }}">
+                                            <a href="{{ path('user_verify', {'id': user.id}) }}" style="color:#e0e0e0;">
                                                 {% trans %}No{% endtrans %}
                                             </a>
                                         {% endif %}
