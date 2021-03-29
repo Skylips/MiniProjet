@@ -7,7 +7,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+/**
+ * Permet d'ajouter les différentes categories d'événement à la BDD
+ * Il est indiqué ici que UserFixtures doit s'executer avant
+ */
 class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
     private $encoder;

@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * Permet d'ajouter des evenements à la BDD
+ * Il est indiqué ici que CategoryFixtures et UserFixtures
+ * doivent s'executer avant pour éviter les problemes
  */
 class EvenementFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -60,7 +62,8 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            UserFixtures::class
+            UserFixtures::class,
+            CategoryFixtures::class
         ];
     }
 }

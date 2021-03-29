@@ -7,9 +7,13 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 /**
  * Permet d'ajouter des commentaires à la BDD
+ * Il est indiqué ici qu'EvenementFixtures et UserFixtures
+ * doivent s'executer avant pour éviter les problemes
  */
+
 class CommentaireFixtures extends Fixture implements DependentFixtureInterface
 {
     private $encoder;
