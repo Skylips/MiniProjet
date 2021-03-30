@@ -46,20 +46,20 @@
 </nav>
 
 {% block content %}
-        <div class="container">
-            <div class="row">
-                {% for evenement in evenements %}
-                    <div class="col s12 m4 l3">
-                        <div class="evenement-card">
-                            <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">
-                            <h2><a href="{{ path('article_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></h2>
-                            <span class="place">{{ evenement.Place}}</span>
-                            <span class="date">{{ evenement.dateEvent|date('d/m/Y') }}</span>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                {% for evenement in evenements %}#}
+{#                    <div class="col s12 m4 l3">#}
+{#                        <div class="evenement-card">#}
+{#                            <img src="{{ asset('uploads/' ~ evenement.picture) }}" class="responsive-img">#}
+{#                            <h2><a href="{{ path('article_show', {'id': evenement.id}) }}">{{ evenement.title }}</a></h2>#}
+{#                            <span class="place">{{ evenement.Place}}</span>#}
+{#                            <span class="date">{{ evenement.dateEvent|date('d/m/Y') }}</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
 {% endblock %}
 
 {% block scripts %}

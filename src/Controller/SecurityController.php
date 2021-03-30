@@ -34,7 +34,6 @@ class SecurityController extends AbstractController
     }
 
     public function removeUser($id, Request $request){
-
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->find($id); //Cherche l'user via son ID
         $entityManager->remove($user); //Supprime l'user

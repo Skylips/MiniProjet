@@ -145,6 +145,9 @@ class BlogController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
+//    /**
+//    * @IsGranted("ROLE_ADMIN")
+//    */
     public function admin()
     {
         //On récupère tous les événements
